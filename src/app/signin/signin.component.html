@@ -1,0 +1,61 @@
+<div
+  class="container-fluid d-flex justify-content-center align-items-center min-vh-100 custom-background"
+>
+  <div class="row justify-content-center w-100">
+    <div class="col-lg-8 col-md-10 col-12">
+      <div class="card p-5 custom-card">
+        <h2 class="mb-4 text-center">Sign In</h2>
+        <form [formGroup]="form1">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              placeholder="Enter username"
+              formControlName="username"
+            />
+            <div
+              *ngIf="
+                form1.controls['username'].touched &&
+                form1.controls['username'].hasError('required')
+              "
+              class="text-danger small mt-1"
+            >
+              The username is required
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Enter password"
+              formControlName="password"
+            />
+            <div
+              *ngIf="
+                form1.controls['password'].touched &&
+                form1.controls['password'].hasError('required')
+              "
+              class="text-danger small mt-1"
+            >
+              The password is required
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary w-100 mt-4 custom-button"
+            (click)="onSignin()"
+            [disabled]="form1.invalid"
+          >
+            Sign In
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

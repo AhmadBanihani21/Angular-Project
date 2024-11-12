@@ -1,0 +1,23 @@
+.custom-container {
+  width: 100%; /* Full width by default */
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+  .custom-container {
+    max-width: 800px; /* Set a max-width at medium breakpoint */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media (min-width: 1000px) {
+  .custom-container {
+    max-width: 900px; /* Adjust max-width at larger breakpoints */
+  }
+}
+@media (min-width: 1200px) {
+  .custom-container {
+    max-width: 1000px; /* Adjust max-width at larger breakpoints */
+  }
+}

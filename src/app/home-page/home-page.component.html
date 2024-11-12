@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-dark custom-bg-navy shadow-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-white" href="#">Store System</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link active text-light"
+            aria-current="page"
+            routerLink="/Home"
+          >
+            <i class="bi bi-house-door-fill"></i> Home
+          </a>
+        </li>
+        <li class="nav-item" *ngFor="let menu of filteredMenu">
+          <a class="nav-link text-light" [routerLink]="menu.path">
+            <i class="bi bi-file-earmark-text-fill"></i> {{ menu.text }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link btn text-light ms-3 px-3 rounded-pill"
+            routerLink="/Home/UserProfile"
+          >
+            <i class="bi bi-person-circle"></i> My Profile
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link btn text-light ms-3 px-3 rounded-pill"
+            routerLink="/Home/ChangePassword"
+          >
+            <i class="bi bi-key-fill"></i> Change Password
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link btn btn-outline-danger ms-3 px-3 rounded-pill"
+            (click)="logOut()"
+          >
+            <i class="bi bi-box-arrow-right"></i> Log Out
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div *ngIf="isRouteVisible" class="container-fluid custom-background"></div>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

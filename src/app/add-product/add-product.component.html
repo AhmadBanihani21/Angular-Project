@@ -1,0 +1,131 @@
+<div class="container mt-5">
+  <h2 class="mb-4 custom-color-navy">
+    {{ editMode ? "Update " : "Create new " }}product
+  </h2>
+  <form [formGroup]="form1">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Enter product name"
+        formControlName="txtname"
+      />
+      <span
+        *ngIf="
+          form1.controls['txtname'].touched &&
+          form1.hasError('required', 'txtname')
+        "
+        class="text-danger"
+      >
+        The name is required
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input
+        type="text"
+        class="form-control"
+        id="description"
+        placeholder="Enter product description"
+        formControlName="txtdescription"
+      />
+      <span
+        *ngIf="
+          form1.controls['txtdescription'].touched &&
+          form1.hasError('required', 'txtdescription')
+        "
+        class="text-danger"
+      >
+        The description is required
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input
+        type="number"
+        class="form-control"
+        id="price"
+        placeholder="Enter price"
+        formControlName="txtprice"
+      />
+      <span
+        *ngIf="
+          form1.controls['txtprice'].touched &&
+          form1.hasError('required', 'txtprice')
+        "
+        class="text-danger"
+      >
+        The price is required
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="stockLevels" class="form-label">Stock Levels</label>
+      <input
+        type="number"
+        class="form-control"
+        id="stockLevels"
+        placeholder="Enter stock levels"
+        formControlName="txtstockLevels"
+      />
+      <span
+        *ngIf="
+          form1.controls['txtstockLevels'].touched &&
+          form1.hasError('required', 'txtstockLevels')
+        "
+        class="text-danger"
+      >
+        The stock levels are required
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="sku" class="form-label">SKU</label>
+      <input
+        type="text"
+        class="form-control"
+        id="sku"
+        placeholder="Enter SKU"
+        formControlName="txtsku"
+      />
+      <span
+        *ngIf="
+          form1.controls['txtsku'].touched &&
+          form1.hasError('required', 'txtsku')
+        "
+        class="text-danger"
+      >
+        The SKU is required
+      </span>
+    </div>
+
+    <button
+      *ngIf="!editMode"
+      type="submit"
+      class="btn custom-bg-navy text-white"
+      (click)="AddProduct()"
+      [disabled]="form1.invalid"
+    >
+      Create
+    </button>
+    <button
+      *ngIf="editMode"
+      type="submit"
+      class="btn custom-bg-navy text-white"
+      (click)="UpdateProduct()"
+      [disabled]="form1.invalid"
+    >
+      Update
+    </button>
+    <button
+      class="btn btn-outline-secondary mx-1"
+      routerLink="/Home/ProductList"
+    >
+      Back to List
+    </button>
+  </form>
+</div>

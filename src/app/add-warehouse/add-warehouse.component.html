@@ -1,0 +1,108 @@
+<div class="container mt-5">
+  <h2 class="mb-4 custom-color-navy">
+    {{ editMode ? "Update " : "Create new " }}warehouse
+  </h2>
+  <form [formGroup]="form1">
+    <div class="mb-3">
+      <label for="location" class="form-label">location</label>
+      <input
+        type="text"
+        class="form-control"
+        id="location"
+        placeholder="Enter location"
+        formControlName="txtLocation"
+      />
+      <span
+        *ngIf="
+          form1.controls['txtLocation'].touched &&
+          form1.hasError('required', 'txtLocation')
+        "
+        class="text-danger"
+      >
+        The location is required
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="manager" class="form-label">manager</label>
+      <input
+        type="text"
+        class="form-control"
+        id="manager"
+        placeholder="Enter manager name"
+        formControlName="txtManager"
+      />
+      <span
+        *ngIf="
+          form1.controls['txtManager'].touched &&
+          form1.hasError('required', 'txtManager')
+        "
+        class="text-danger"
+      >
+        The manager name is required
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="capcity" class="form-label">capcity</label>
+      <input
+        type="text"
+        class="form-control"
+        id="capcity"
+        placeholder="Enter capcity"
+        formControlName="txtCapcity"
+      />
+      <span
+        *ngIf="
+          form1.controls['txtCapcity'].touched &&
+          form1.hasError('required', 'txtCapcity')
+        "
+        class="text-danger"
+      >
+        The capcity is required
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="Status" class="form-label">Warehouse Status</label>
+      <select class="form-control" id="Status" formControlName="txtStatus">
+        <option
+          *ngFor="let warehouseStatus of warehouseStatus"
+          [value]="warehouseStatus"
+        >
+          {{ warehouseStatus }}
+        </option>
+      </select>
+      <span
+        *ngIf="
+          form1.controls['txtStatus'].touched &&
+          form1.hasError('required', 'txtStatus')
+        "
+        class="text-danger"
+      >
+        The Warehouse status is required
+      </span>
+    </div>
+    <button
+      *ngIf="!editMode"
+      type="submit"
+      class="btn custom-bg-navy text-white"
+      (click)="AddWarehouse()"
+      [disabled]="form1.invalid"
+    >
+      Create
+    </button>
+    <button
+      *ngIf="editMode"
+      type="submit"
+      class="btn custom-bg-navy text-white"
+      (click)="UpdateWareHouse()"
+      [disabled]="form1.invalid"
+    >
+      Update
+    </button>
+    <button class="btn btn-secondary mx-1" routerLink="/Home/WareHouseList">
+      back to list
+    </button>
+  </form>
+</div>

@@ -1,0 +1,159 @@
+<div class="container mt-5">
+  <h2 class="mb-4">{{ editMode ? "Update" : "Create New" }} User</h2>
+  <form [formGroup]="form1">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        placeholder="Enter username"
+        formControlName="username"
+      />
+      <span
+        *ngIf="
+          form1.controls['username'].touched &&
+          form1.hasError('required', 'username')
+        "
+        class="text-danger"
+      >
+        The username is required
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        placeholder="Enter email"
+        formControlName="email"
+      />
+      <span
+        *ngIf="
+          form1.controls['email'].touched && form1.hasError('required', 'email')
+        "
+        class="text-danger"
+      >
+        The email is required
+      </span>
+    </div>
+
+    <div class="mb-3" *ngIf="!editMode">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Enter password"
+        formControlName="password"
+      />
+      <span
+        *ngIf="
+          form1.controls['password'].touched &&
+          form1.controls['password'].hasError('required')
+        "
+        class="text-danger"
+      >
+        The password is required
+      </span>
+      <span
+        *ngIf="
+          form1.controls['password'].touched &&
+          form1.controls['password'].hasError('passwordStrength')
+        "
+        class="text-danger"
+      >
+        Password must be at least 8 characters long, include a digit, a
+        lowercase letter, an uppercase letter, and a special character
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Enter name"
+        formControlName="name"
+      />
+      <span
+        *ngIf="
+          form1.controls['name'].touched && form1.hasError('required', 'name')
+        "
+        class="text-danger"
+      >
+        The name is required
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="roleName" class="form-label">Role</label>
+      <select
+        class="form-control"
+        id="roleName"
+        formControlName="roleName"
+        (change)="onRoleChange()"
+      >
+        <option *ngFor="let role of roles" [value]="role.name">
+          {{ role.name }}
+        </option>
+      </select>
+      <span
+        *ngIf="
+          form1.controls['roleName'].touched &&
+          form1.hasError('required', 'roleName')
+        "
+        class="text-danger"
+      >
+        The role is required
+      </span>
+    </div>
+
+    <div class="mb-3" *ngIf="form1.controls['roleName'].value === 'Employee'">
+      <label for="warehouseId" class="form-label">Warehouse Location</label>
+      <select
+        class="form-control"
+        id="warehouseId"
+        formControlName="warehouseId"
+      >
+        <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+          {{ warehouse.location }}
+        </option>
+      </select>
+      <span
+        *ngIf="
+          form1.controls['warehouseId'].touched &&
+          form1.hasError('required', 'warehouseId')
+        "
+        class="text-danger"
+      >
+        The warehouse location is required
+      </span>
+    </div>
+
+    <button
+      *ngIf="!editMode"
+      type="submit"
+      class="btn custom-bg-navy text-white"
+      (click)="AddUser()"
+      [disabled]="form1.invalid"
+    >
+      Sign Up
+    </button>
+    <button
+      *ngIf="editMode"
+      type="submit"
+      class="btn btn-primary"
+      (click)="onUpdate()"
+      [disabled]="form1.invalid"
+    >
+      Update
+    </button>
+    <button class="btn btn-outline-secondary mx-1" routerLink="/Home/userList">
+      Back to List
+    </button>
+  </form>
+</div>

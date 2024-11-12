@@ -1,0 +1,73 @@
+<div class="card shadow border-0 mt-4">
+  <div class="card-header custom-bg-navy bg-gradient py-4">
+    <h3 class="text-center text-white mb-0">Warehouse Directory</h3>
+  </div>
+
+  <div class="card-body p-4">
+    <div class="row align-items-center pb-3">
+      <div class="col-12 col-lg-4 d-flex gap-2 mb-2 mb-lg-0">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by location"
+          #location
+        />
+        <button
+          class="btn custom-bg-navy"
+          (click)="getAllWarehousesByLocation()"
+        >
+          <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i>
+        </button>
+      </div>
+
+      <div class="col-2 d-none d-lg-block"></div>
+
+      <div class="col-12 col-lg-6 text-lg-end">
+        <a
+          class="btn custom-bg-navy text-white"
+          routerLink="/Home/addWarehouse"
+        >
+          <i class="bi bi-plus-circle"></i> Add New Warehouse
+        </a>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Location</th>
+            <th>Manager</th>
+            <th>Capacity</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of warehouse">
+            <td style="width: 20%">{{ item.location }}</td>
+            <td style="width: 20%">{{ item.manager }}</td>
+            <td style="width: 20%">{{ item.capcity }}</td>
+            <td style="width: 20%">{{ item.status }}</td>
+            <td class="w-auto">
+              <div class="w-100 btn-group" role="group">
+                <a
+                  class="btn btn-success mx-1"
+                  (click)="editWarehouse(item.id)"
+                >
+                  <i class="bi bi-pencil-square"></i> Edit
+                </a>
+                <a
+                  class="btn btn-danger mx-1"
+                  (click)="deleteWarehouse(item.id)"
+                >
+                  <i class="bi bi-trash-fill"></i> Delete
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

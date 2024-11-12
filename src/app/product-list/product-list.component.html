@@ -1,0 +1,122 @@
+<div class="card shadow border-0 mt-4">
+  <div class="card-header custom-bg-navy bg-gradient py-4">
+    <h3 class="text-center text-white mb-0">Product Directory</h3>
+  </div>
+
+  <div class="card-body p-4">
+    <div class="row align-items-center pb-3">
+      <div class="col-12 col-lg-3 d-flex gap-2 mb-2 mb-lg-0">
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          placeholder="Search by name"
+          #name
+        />
+        <button
+          class="btn custom-bg-navy btn-sm"
+          (click)="getAllProductsByName()"
+        >
+          <i class="fa-solid fa-magnifying-glass text-white"></i>
+        </button>
+      </div>
+
+      <div class="col-12 col-lg-3 d-flex align-items-center gap-2 mb-2 mb-lg-0">
+        <label for="price-min" class="mb-0">JOD</label>
+        <input
+          type="number"
+          class="form-control form-control-sm"
+          id="price-min"
+          [(ngModel)]="priceMin"
+          placeholder="Min"
+        />
+        <span class="mb-0">–</span>
+        <label for="price-max" class="mb-0">JOD</label>
+        <input
+          type="number"
+          class="form-control form-control-sm"
+          id="price-max"
+          [(ngModel)]="priceMax"
+          placeholder="Max"
+        />
+        <button
+          class="btn custom-bg-navy text-white btn-sm"
+          (click)="filterByPrice()"
+        >
+          Apply
+        </button>
+      </div>
+
+      <div
+        class="col-12 col-lg-3 d-flex justify-content-lg-center align-items-center gap-1 mb-2 mb-lg-0"
+      >
+        <button
+          class="btn custom-bg-navy text-white btn-sm"
+          (click)="sortAsc()"
+        >
+          Sort Asc
+        </button>
+        <button
+          class="btn custom-bg-navy text-white btn-sm"
+          (click)="sortDesc()"
+        >
+          Sort Desc
+        </button>
+      </div>
+
+      <div class="col-12 col-lg-3 text-lg-end mb-2 mb-lg-0">
+        <a
+          class="btn custom-bg-navy text-white btn-sm"
+          routerLink="/Home/addProduct"
+        >
+          <i class="bi bi-plus-circle"></i> Add New Product
+        </a>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>price</th>
+            <th>stockLevels</th>
+            <th>sku</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of product">
+            <td style="width: 10%">{{ item.name }}</td>
+            <td style="width: 40%">{{ item.description }}</td>
+            <td style="width: 10%">{{ item.price }}</td>
+            <td style="width: 10%">{{ item.stockLevels }}</td>
+            <td style="width: 10%">{{ item.sku }}</td>
+            <td class="w-auto">
+              <div class="w-100 d-flex align-items-center">
+                <a
+                  class="btn btn-outline-primary mx-1"
+                  (click)="placeOrder(item.id)"
+                >
+                  <i class="bi bi-cart-check"></i> Place Order
+                </a>
+
+                <i
+                  class="fa-solid fa-pen-to-square mx-2"
+                  (click)="editProduct(item.id)"
+                  style="color: green; cursor: pointer"
+                ></i>
+
+                <i
+                  class="fa-solid fa-trash mx-2"
+                  (click)="deleteProduct(item.id)"
+                  style="color: red; cursor: pointer"
+                ></i>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<div class="container mt-5 d-flex justify-content-center">
+  <div
+    class="card p-4 shadow-lg"
+    style="width: 100%; max-width: 500px; border-radius: 15px"
+  >
+    <div class="card-body">
+      <h2 class="mb-4 text-center custom-color-navy">Your Profile</h2>
+      <form [formGroup]="form1">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            placeholder="Enter username"
+            formControlName="username"
+          />
+          <span
+            *ngIf="
+              form1.controls['username'].touched &&
+              form1.hasError('required', 'username')
+            "
+            class="text-danger"
+          >
+            Username is required
+          </span>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Enter email"
+            formControlName="email"
+          />
+          <span
+            *ngIf="
+              form1.controls['email'].touched &&
+              form1.hasError('required', 'email')
+            "
+            class="text-danger"
+          >
+            Email is required
+          </span>
+          <span
+            *ngIf="
+              form1.controls['email'].touched &&
+              form1.hasError('email', 'email')
+            "
+            class="text-danger"
+          >
+            Enter a valid email address
+          </span>
+        </div>
+
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Enter your name"
+            formControlName="name"
+          />
+          <span
+            *ngIf="
+              form1.controls['name'].touched &&
+              form1.hasError('required', 'name')
+            "
+            class="text-danger"
+          >
+            Name is required
+          </span>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+          <button
+            type="button"
+            class="btn custom-bg-navy text-white w-100"
+            (click)="onUpdate()"
+            [disabled]="form1.invalid"
+          >
+            Update Profile
+          </button>
+          <button class="btn btn-outline-secondary mx-1" routerLink="/home">
+            Back to Home
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

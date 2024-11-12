@@ -1,0 +1,167 @@
+<div class="container mt-5">
+  <h2 class="mb-4 custom-color-navy">
+    {{ editMode ? "Update " : "Create new " }}order
+  </h2>
+  <h2 class="custom-color-navy">Total price {{ totalPrice | currency }}</h2>
+  <form *ngIf="product" [formGroup]="form1">
+    <div class="mb-3">
+      <label for="quantity" class="form-label">Quantity</label>
+      <input
+        type="number"
+        class="form-control"
+        id="quantity"
+        placeholder="Enter order quantity"
+        formControlName="txtquantity"
+        (input)="totalPriceValue()"
+      />
+      <span
+        *ngIf="
+          form1.controls['txtquantity'].touched &&
+          form1.hasError('required', 'txtquantity')
+        "
+        class="text-danger"
+      >
+        The quantity is required
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="customerDetails" class="form-label">Customer Details</label>
+      <input
+        type="text"
+        class="form-control"
+        id="customerDetails"
+        placeholder="Enter customer details"
+        formControlName="txtcustomerDetails"
+      />
+      <span
+        *ngIf="
+          form1.controls['txtcustomerDetails'].touched &&
+          form1.hasError('required', 'txtcustomerDetails')
+        "
+        class="text-danger"
+      >
+        Customer details are required
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="PaymentMethod" class="form-label">Payment Method</label>
+      <select
+        class="form-control"
+        id="PaymentMethod"
+        formControlName="txtpaymentMethod"
+      >
+        <option
+          *ngFor="let paymentMethod of paymentMethod"
+          [value]="paymentMethod"
+        >
+          {{ paymentMethod }}
+        </option>
+      </select>
+      <span
+        *ngIf="
+          form1.controls['txtpaymentMethod'].touched &&
+          form1.hasError('required', 'txtpaymentMethod')
+        "
+        class="text-danger"
+      >
+        The Payment Method is required
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="shippingAddress" class="form-label">Shipping Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="shippingAddress"
+        placeholder="Enter shipping address"
+        formControlName="txtshippingAddress"
+      />
+      <span
+        *ngIf="
+          form1.controls['txtshippingAddress'].touched &&
+          form1.hasError('required', 'txtshippingAddress')
+        "
+        class="text-danger"
+      >
+        Shipping address is required
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="orderStatus" class="form-label">Order Status</label>
+      <select
+        class="form-control"
+        id="orderStatus"
+        formControlName="txtorderStatus"
+      >
+        <option *ngFor="let orderStatus of orderStatus" [value]="orderStatus">
+          {{ orderStatus }}
+        </option>
+      </select>
+      <span
+        *ngIf="
+          form1.controls['txtorderStatus'].touched &&
+          form1.hasError('required', 'txtorderStatus')
+        "
+        class="text-danger"
+      >
+        Order status is required
+      </span>
+    </div>
+    <div class="mb-3" *ngIf="editMode">
+      <label for="productName" class="form-label">Product Name</label>
+      <select
+        class="form-control"
+        id="productName"
+        formControlName="txtproductId"
+      >
+        <option *ngFor="let product of allProducts" [value]="product.id">
+          {{ product.name }}
+        </option>
+      </select>
+      <span
+        *ngIf="
+          form1.controls['txtproductId'].touched &&
+          form1.hasError('required', 'txtproductId')
+        "
+        class="text-danger"
+      >
+        Product Name is required
+      </span>
+    </div>
+    <div class="mb-3" *ngIf="!editMode">
+      <label for="productName" class="form-label">Product Name</label>
+      <h3
+        id="productName"
+        class="font-weight-bold custom-color-navy product-name"
+      >
+        {{ product.name }}
+      </h3>
+    </div>
+
+    <button
+      *ngIf="!editMode"
+      type="submit"
+      class="btn custom-bg-navy text-white"
+      (click)="AddOrder()"
+      [disabled]="form1.invalid"
+    >
+      Create Order
+    </button>
+    <button
+      *ngIf="editMode"
+      type="submit"
+      class="btn custom-bg-navy text-white"
+      (click)="UpdateOrder()"
+      [disabled]="form1.invalid"
+    >
+      Update Order
+    </button>
+    <button class="btn btn-outline-secondary mx-1" routerLink="/Home/orderlist">
+      Back to Order List
+    </button>
+  </form>
+</div>
